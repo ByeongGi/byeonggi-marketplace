@@ -7,9 +7,7 @@ Byeonggi's custom plugin marketplace for Claude Code, providing developer produc
 ```
 byeonggi-marketplace/
 ├── .claude-plugin/marketplace.json
-├── plugins/
-│   ├── developer-tools/        # Code formatting, review agents
-│   └── project-templates/      # Project scaffolding
+├── plugins/                    # Plugin directory (empty - add your plugins here)
 ├── scripts/                    # Validation and version sync tools
 └── DEVELOPMENT.md              # Complete development guide
 ```
@@ -27,7 +25,7 @@ byeonggi-marketplace/
 ## Core Conventions
 
 **Naming (kebab-case):**
-- Plugin names: `developer-tools`
+- Plugin names: `my-plugin`
 - Files: `format.md`, `code-reviewer.md`
 - Commands: `commands/command-name.md`
 - Agents: `agents/agent-name.md`
@@ -114,7 +112,7 @@ cat .claude-plugin/marketplace.json | jq .
 **Local testing:**
 ```bash
 /plugin marketplace add .
-/plugin install developer-tools@byeonggi-marketplace
+/plugin install <plugin-name>@byeonggi-marketplace
 ```
 
 ## Essential Commands

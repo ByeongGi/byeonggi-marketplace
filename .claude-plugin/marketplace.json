@@ -9,31 +9,5 @@
         "version": "1.0.0",
         "pluginRoot": "./plugins"
     },
-    "plugins": [
-        {
-            "name": "developer-tools",
-            "source": "./plugins/developer-tools",
-            "description": "Essential tools for developer productivity including code formatting and review agents",
-            "version": "1.0.0",
-            "category": "productivity",
-            "tags": [
-                "developer",
-                "tools",
-                "formatting",
-                "review"
-            ]
-        },
-        {
-            "name": "project-templates",
-            "source": "./plugins/project-templates",
-            "description": "Quickly scaffold new projects with best practice templates",
-            "version": "1.0.0",
-            "category": "scaffolding",
-            "tags": [
-                "templates",
-                "project",
-                "init"
-            ]
-        }
-    ]
+    "plugins": []
 }

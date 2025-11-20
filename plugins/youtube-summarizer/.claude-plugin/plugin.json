@@ -1,0 +1,19 @@
+{
+    "name": "youtube-summarizer",
+    "version": "1.0.0",
+    "description": "Extract and summarize YouTube video transcripts with timestamp support",
+    "author": {
+        "name": "Byeonggi"
+    },
+    "skills": [
+        "./skills/youtube-summarizer"
+    ],
+    "homepage": "https://github.com/ByeongGi/youtube-summarizer-skill",
+    "license": "MIT",
+    "keywords": [
+        "youtube",
+        "transcript",
+        "summarizer",
+        "captions"
+    ]
+}

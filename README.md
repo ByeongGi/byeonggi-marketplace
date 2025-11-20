@@ -18,28 +18,7 @@ Or install directly from GitHub:
 
 ## 🔌 Available Plugins
 
-### Developer Tools
-
-Essential tools for developer productivity
-
-```bash
-/plugin install developer-tools@byeonggi-marketplace
-```
-
-**Features:**
-- `/format` - Code formatting
-- `code-reviewer` - Code review agent
-
-### Project Templates
-
-Project initialization templates
-
-```bash
-/plugin install project-templates@byeonggi-marketplace
-```
-
-**Features:**
-- `/init-project` - Project scaffolding
+No plugins available yet. Add your first plugin following the guide in [DEVELOPMENT.md](./DEVELOPMENT.md).
 
 ## 🛠 Developer Guide
 
@@ -63,21 +42,14 @@ cd /path/to/byeonggi-marketplace
 /plugin marketplace add .
 ```
 
-### 2. Install Plugins
+### 2. Add Plugins
+
+Follow the guide in [DEVELOPMENT.md](./DEVELOPMENT.md#-development-checklist) to add your first plugin.
+
+### 3. Install and Use Plugins
 
 ```bash
-/plugin install developer-tools@byeonggi-marketplace
-/plugin install project-templates@byeonggi-marketplace
-```
-
-### 3. Use Plugins
-
-```bash
-# Code formatting
-/format
-
-# Create new project
-/init-project
+/plugin install <plugin-name>@byeonggi-marketplace
 ```
 
 ## 📖 Essential Commands
