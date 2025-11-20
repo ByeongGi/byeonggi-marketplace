@@ -51,7 +51,7 @@ byeonggi-marketplace/
 4. Update `.claude-plugin/marketplace.json` plugins array
 5. `npm run validate:all`
 
-[Detailed checklist](./DEVELOPMENT.md#새-플러그인-추가-시)
+[Detailed checklist](./DEVELOPMENT.md#when-adding-new-plugin)
 
 ### Updating Plugin
 1. Modify plugin files
@@ -64,7 +64,7 @@ byeonggi-marketplace/
 2. `npm run version:patch` (or minor/major)
 3. `git tag v1.0.1 && git push origin main --tags`
 
-[Full process](./DEVELOPMENT.md#버전-업데이트-워크플로우)
+[Full process](./DEVELOPMENT.md#version-update-workflow)
 
 ## JSON Specifications
 
@@ -93,7 +93,7 @@ byeonggi-marketplace/
 }
 ```
 
-[Full schemas](./DEVELOPMENT.md#📐-json-스키마)
+[Full schemas](./DEVELOPMENT.md#-json-schemas)
 
 ## Testing & Validation
 
@@ -125,7 +125,7 @@ npm run version:dry-run       # Preview version changes
 npm test                      # Run tests
 ```
 
-[All commands](./DEVELOPMENT.md#🛠-개발-도구)
+[All commands](./DEVELOPMENT.md#-development-tools)
 
 ## Key Rules
 
@@ -134,4 +134,4 @@ npm test                      # Run tests
 3. **Use kebab-case everywhere**: Plugin names, file names
 4. **`.claude-plugin/` is sacred**: Only `plugin.json` allowed
 
-[Troubleshooting](./DEVELOPMENT.md#🔍-문제-해결)
+[Troubleshooting](./DEVELOPMENT.md#-troubleshooting)
