@@ -4,31 +4,53 @@ A custom plugin marketplace for Claude Code, adhering to official Claude Code do
 
 ## 📦 Installation
 
-### Add Local Marketplace
+### Add Marketplace from GitHub
 
 ```bash
-/plugin marketplace add .
+/plugin marketplace add ByeongGi/byeonggi-marketplace
 ```
 
-Or install directly from GitHub:
+This will add the marketplace to your Claude Code installation and make all plugins available.
+
+### Local Installation (for development)
+
+If you've cloned the repository locally:
 
 ```bash
-/plugin marketplace add byeonggi/claude-marketplace
+cd /path/to/byeonggi-marketplace
+/plugin marketplace add .
 ```
 
 ## 🔌 Available Plugins
 
-No plugins available yet. Add your first plugin following the guide in [DEVELOPMENT.md](./DEVELOPMENT.md).
+### youtube-summarizer
+
+Extract and summarize YouTube video transcripts with timestamp support.
+
+**Installation:**
+```bash
+/plugin install youtube-summarizer@byeonggi-marketplace
+```
+
+**Features:**
+- Extract YouTube video captions and transcripts
+- Support for multiple languages (Korean, English, and more)
+- Timestamped transcript data
+- AI-powered intelligent summaries
+
+[View Plugin Details →](./plugins/youtube-summarizer/README.md)
 
 ## 🛠 Developer Guide
 
 > **For complete development information, see [DEVELOPMENT.md](./DEVELOPMENT.md).**
 
-**Quick Start:**
+**Local Development Setup:**
 ```bash
+git clone https://github.com/ByeongGi/byeonggi-marketplace.git
+cd byeonggi-marketplace
 npm install                 # Install dependencies
+/plugin marketplace add .   # Add local marketplace
 npm run validate:all        # Run validation
-npm run version:patch       # Bump version
 ```
 
 **Quick Reference:** [CLAUDE.md](./CLAUDE.md) - Command cheatsheet
@@ -38,19 +60,26 @@ npm run version:patch       # Bump version
 ### 1. Add Marketplace
 
 ```bash
-cd /path/to/byeonggi-marketplace
-/plugin marketplace add .
+/plugin marketplace add ByeongGi/byeonggi-marketplace
 ```
 
-### 2. Add Plugins
-
-Follow the guide in [DEVELOPMENT.md](./DEVELOPMENT.md#-development-checklist) to add your first plugin.
-
-### 3. Install and Use Plugins
+### 2. Install a Plugin
 
 ```bash
-/plugin install <plugin-name>@byeonggi-marketplace
+/plugin install youtube-summarizer@byeonggi-marketplace
 ```
+
+### 3. Use the Plugin
+
+Simply interact with Claude Code:
+
+```
+Summarize this YouTube video: https://www.youtube.com/watch?v=VIDEO_ID
+```
+
+### For Plugin Development
+
+See [DEVELOPMENT.md](./DEVELOPMENT.md#-development-checklist) for how to add your own plugins.
 
 ## 📖 Essential Commands
 
@@ -81,10 +110,13 @@ npm test                  # Run tests
 **For detailed contribution guide, see [DEVELOPMENT.md](./DEVELOPMENT.md#-development-checklist).**
 
 Basic steps:
-1. Fork and Clone
-2. Add new plugin or modify existing plugin
-3. Run `npm run validate:all`
-4. Create Pull Request
+1. Fork the repository on GitHub
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/byeonggi-marketplace.git`
+3. Create a new branch: `git checkout -b feature/my-new-plugin`
+4. Add new plugin or modify existing plugin
+5. Run `npm run validate:all` to ensure everything is valid
+6. Commit your changes and push to your fork
+7. Create a Pull Request on GitHub
 
 ## ⚙️ Tech Stack
 
