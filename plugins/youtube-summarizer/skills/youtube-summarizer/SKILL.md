@@ -17,14 +17,14 @@ Use this skill when:
 
 1. **Extract Transcript**: Run the extraction script with the YouTube URL
    ```bash
-   .venv/bin/python scripts/extract_transcript.py <youtube_url> [language_codes]
+   .venv/bin/python skills/youtube-summarizer/scripts/extract_transcript.py <youtube_url> [language_codes]
    ```
 
 2. **Analyze Content**: Process the extracted transcript data
 
 3. **Generate Summary**: Create structured summaries based on user needs
 
-4. **Save Output**: Store formatted summaries in the `summaries/` directory
+4. **Save Output**: Store formatted summaries in the `summaries/` directory in the user's project root
 
 ## Output Format
 
@@ -67,4 +67,4 @@ Adapt output based on user needs:
 2. Analyze the returned JSON data
 3. Generate a concise summary with key points
 4. Include timestamps for important sections
-5. Save the summary to `summaries/` directory
+5. Save the summary to `summaries/` directory in the user's project root

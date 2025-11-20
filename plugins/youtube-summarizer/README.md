@@ -49,12 +49,11 @@ uv pip install -r requirements.txt
 
 ### Python Scripts
 
-The Python extraction scripts need to be copied from the original repository:
-https://github.com/ByeongGi/youtube-summarizer-skill
+The Python extraction scripts are included in the plugin:
+- `skills/youtube-summarizer/scripts/extract_transcript.py` - Main transcript extraction script
+- `skills/youtube-summarizer/scripts/debug_transcript.py` - Debugging utility
 
-Copy the following files to `plugins/youtube-summarizer/scripts/`:
-- `extract_transcript.py` - Main transcript extraction script
-- `debug_transcript.py` - Debugging utility
+These scripts are automatically available after plugin installation.
 
 ## Usage
 
@@ -70,19 +69,21 @@ The skill will automatically:
 1. Extract the transcript
 2. Analyze the content
 3. Generate a structured summary
-4. Save the summary to the `summaries/` directory
+4. Save the summary to the `summaries/` directory in your project root
 
 ### Direct Script Usage (Optional)
 
-You can also run the extraction script directly:
+You can also run the extraction script directly from the skill directory:
 
 ```bash
-.venv/bin/python scripts/extract_transcript.py <youtube_url> [language_codes...]
+cd skills/youtube-summarizer
+../../.venv/bin/python scripts/extract_transcript.py <youtube_url> [language_codes...]
 ```
 
 Example:
 ```bash
-.venv/bin/python scripts/extract_transcript.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" ko en
+cd skills/youtube-summarizer
+../../.venv/bin/python scripts/extract_transcript.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" ko en
 ```
 
 ### Supported URL Formats
@@ -150,20 +151,22 @@ plugins/youtube-summarizer/
 │   └── plugin.json          # Plugin manifest
 ├── skills/
 │   └── youtube-summarizer/
-│       └── SKILL.md         # Skill definition
-├── scripts/
-│   ├── extract_transcript.py  # Main extraction script
-│   └── debug_transcript.py    # Debugging utility
-├── summaries/               # Auto-generated summaries (gitignored)
+│       ├── SKILL.md         # Skill definition
+│       └── scripts/
+│           ├── extract_transcript.py  # Main extraction script
+│           └── debug_transcript.py    # Debugging utility
 ├── requirements.txt         # Python dependencies
+├── .gitignore              # Git ignore file
 └── README.md               # This file
 ```
+
+**Note**: Summaries are saved to `summaries/` directory in your project root, not inside the plugin.
 
 ## Technical Details
 
 - **Primary Dependency**: `youtube-transcript-api`
 - **Language Support**: Korean, English, Japanese, Spanish, French, and more
-- **Output Storage**: `summaries/` directory (markdown format)
+- **Output Storage**: `summaries/` directory in your project root (markdown format)
 - **Python Version**: 3.7+
 
 ## License
