@@ -1,0 +1,15 @@
+{
+    "name": "byeonggi-marketplace",
+    "version": "1.0.0",
+    "description": "Byeonggi's custom plugin marketplace for Claude Code",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "claude-code",
+        "plugin",
+        "marketplace"
+    ],
+    "author": "Byeonggi",
+    "license": "MIT"
+}

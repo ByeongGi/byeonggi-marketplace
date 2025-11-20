@@ -1,0 +1,11 @@
+{
+    "name": "project-templates",
+    "version": "1.0.0",
+    "description": "Quickly scaffold new projects",
+    "author": {
+        "name": "Byeonggi"
+    },
+    "commands": [
+        "./commands/init-project.md"
+    ]
+}
