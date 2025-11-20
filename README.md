@@ -7,7 +7,7 @@ A custom plugin marketplace for Claude Code, adhering to official Claude Code do
 ### Add Marketplace from GitHub
 
 ```bash
-/plugin marketplace add ByeongGi/byeonggi-marketplace
+/plugin marketplace add https://github.com/ByeongGi/byeonggi-marketplace.git
 ```
 
 This will add the marketplace to your Claude Code installation and make all plugins available.
@@ -60,7 +60,7 @@ npm run validate:all        # Run validation
 ### 1. Add Marketplace
 
 ```bash
-/plugin marketplace add ByeongGi/byeonggi-marketplace
+/plugin marketplace add https://github.com/ByeongGi/byeonggi-marketplace.git
 ```
 
 ### 2. Install a Plugin
