@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Claude Code Plugin Schema",
+  "description": "Schema for validating plugin.json files according to official documentation",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Plugin identifier in kebab-case (required)"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version (MAJOR.MINOR.PATCH)"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "commands": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\./.+\\.md$"
+          }
+        },
+        {
+          "type": "string",
+          "pattern": "^\\./.+"
+        }
+      ],
+      "description": "Relative paths to command markdown files"
+    },
+    "agents": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\./.+\\.md$"
+          }
+        },
+        {
+          "type": "string",
+          "pattern": "^\\./.+"
+        }
+      ],
+      "description": "Relative paths to agent markdown files"
+    },
+    "skills": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\./.+"
+          }
+        },
+        {
+          "type": "string",
+          "pattern": "^\\./.+"
+        }
+      ],
+      "description": "Relative paths to skill directories containing SKILL.md"
+    },
+    "hooks": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\./.+\\.json$"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\./.+"
+        }
+      ],
+      "description": "Path to hooks.json file"
+    },
+    "mcpServers": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^\\./.+\\.json$"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\./.+"
+        }
+      ],
+      "description": "Path to .mcp.json file"
+    }
+  }
+}

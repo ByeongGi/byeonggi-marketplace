@@ -2,14 +2,38 @@
     "name": "byeonggi-marketplace",
     "version": "1.0.0",
     "description": "Byeonggi's custom plugin marketplace for Claude Code",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/byeonggi/claude-marketplace.git"
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "validate": "node scripts/validate.js",
+        "validate:structure": "node scripts/check-plugin-structure.js",
+        "validate:all": "npm run validate:structure && npm run validate",
+        "version:sync": "node scripts/sync-versions.js",
+        "version:patch": "node scripts/sync-versions.js --patch",
+        "version:minor": "node scripts/sync-versions.js --minor",
+        "version:major": "node scripts/sync-versions.js --major",
+        "version:dry-run": "node scripts/sync-versions.js --dry-run --patch",
+        "test": "npm run validate:all",
+        "prerelease": "npm run validate:all",
+        "format:json": "find . -name '*.json' ! -path '*/node_modules/*' -exec sh -c 'echo \"Formatting {}\" && cat {} | jq . > {}.tmp && mv {}.tmp {}' \\;",
+        "install:local": "echo '💡 Run: /plugin marketplace add .'",
+        "help": "echo '\n📦 Available Commands:\n\n  npm run validate          - Validate JSON schemas\n  npm run validate:structure - Check directory structure\n  npm run validate:all      - Run all validations\n\n  npm run version:patch     - Bump patch version (x.x.X)\n  npm run version:minor     - Bump minor version (x.X.0)\n  npm run version:major     - Bump major version (X.0.0)\n  npm run version:dry-run   - Preview version changes\n\n  npm run format:json       - Format all JSON files\n  npm test                  - Run all tests\n'"
     },
     "keywords": [
         "claude-code",
-        "plugin",
-        "marketplace"
+        "plugins",
+        "marketplace",
+        "developer-tools"
     ],
     "author": "Byeonggi",
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "ajv": "^8.12.0",
+        "ajv-formats": "^2.1.1"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
 }
