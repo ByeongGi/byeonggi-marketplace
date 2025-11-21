@@ -7,14 +7,14 @@
         "url": "https://github.com/ByeongGi/byeonggi-marketplace.git"
     },
     "scripts": {
-        "validate": "node scripts/validate.js",
-        "validate:structure": "node scripts/check-plugin-structure.js",
+        "validate": "tsx scripts/validate.ts",
+        "validate:structure": "tsx scripts/check-plugin-structure.ts",
         "validate:all": "npm run validate:structure && npm run validate",
-        "version:sync": "node scripts/sync-versions.js",
-        "version:patch": "node scripts/sync-versions.js --patch",
-        "version:minor": "node scripts/sync-versions.js --minor",
-        "version:major": "node scripts/sync-versions.js --major",
-        "version:dry-run": "node scripts/sync-versions.js --dry-run --patch",
+        "version:sync": "tsx scripts/sync-versions.ts",
+        "version:patch": "tsx scripts/sync-versions.ts --patch",
+        "version:minor": "tsx scripts/sync-versions.ts --minor",
+        "version:major": "tsx scripts/sync-versions.ts --major",
+        "version:dry-run": "tsx scripts/sync-versions.ts --dry-run --patch",
         "test": "npm run validate:all",
         "prerelease": "npm run validate:all",
         "format:json": "find . -name '*.json' ! -path '*/node_modules/*' -exec sh -c 'echo \"Formatting {}\" && cat {} | jq . > {}.tmp && mv {}.tmp {}' \\;",
@@ -29,8 +29,12 @@
     "author": "Byeonggi",
     "license": "MIT",
     "devDependencies": {
+        "@types/node": "^24.10.1",
         "ajv": "^8.12.0",
-        "ajv-formats": "^2.1.1"
+        "ajv-formats": "^2.1.1",
+        "js-yaml": "^4.1.1",
+        "tsx": "^4.20.6",
+        "typescript": "^5.9.3"
     },
     "engines": {
         "node": ">=16.0.0"

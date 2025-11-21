@@ -21,6 +21,7 @@ byeonggi-marketplace/
 **Official:**
 - [Plugin Marketplaces](https://code.claude.com/docs/en/plugin-marketplaces.md)
 - [Plugins Reference](https://code.claude.com/docs/en/plugins-reference.md)
+- [Skills Documentation](https://code.claude.com/docs/en/skills)
 
 ## Core Conventions
 
@@ -58,6 +59,20 @@ byeonggi-marketplace/
 2. Update `plugin.json` if adding/removing components
 3. `npm run validate:all`
 4. If releasing: `npm run version:patch`
+
+### Adding New Skill
+1. Create `plugins/plugin-name/skills/skill-name/`
+2. Create `SKILL.md` with YAML frontmatter:
+   ```yaml
+   ---
+   name: skill-name
+   description: What it does and when to use it
+   ---
+   ```
+3. Add to `plugin.json`: `"skills": ["./skills/skill-name"]`
+4. `npm run validate:all`
+
+[Full Skills guide](./DEVELOPMENT.md#-skills-development-guide)
 
 ### Version Release
 1. `npm run validate:all`

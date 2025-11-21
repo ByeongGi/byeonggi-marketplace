@@ -1,3 +1,13 @@
+---
+name: youtube-summarizer
+description: |
+  Extract YouTube video transcripts and generate intelligent summaries
+  with timestamp support. Use when users provide YouTube URLs seeking
+  summaries, content extraction without full video viewing, or timestamped
+  breakdowns. Triggers on YouTube links, video summarization requests,
+  transcript extraction, and caption-related tasks.
+---
+
 # YouTube Summarizer
 
 Extract YouTube video transcripts and generate intelligent summaries with timestamp support.

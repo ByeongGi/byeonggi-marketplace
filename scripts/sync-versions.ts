@@ -1,15 +1,16 @@
-#!/usr/bin/env node
+#!/usr/bin/env npx tsx
 
 /**
  * 버전 동기화 도구
  * marketplace.json과 각 plugin.json의 버전을 동기화합니다.
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
 
-const COLORS = {
+type ColorKey = 'reset' | 'red' | 'green' | 'yellow' | 'blue' | 'cyan';
+
+const COLORS: Record<ColorKey, string> = {
   reset: '\x1b[0m',
   red: '\x1b[31m',
   green: '\x1b[32m',
@@ -18,20 +19,28 @@ const COLORS = {
   cyan: '\x1b[36m',
 };
 
-function log(color, message) {
+function log(color: ColorKey, message: string): void {
   console.log(`${COLORS[color]}${message}${COLORS.reset}`);
 }
 
-function isValidVersion(version) {
+function isValidVersion(version: string): boolean {
   return /^\d+\.\d+\.\d+$/.test(version);
 }
 
-function parseVersion(version) {
+interface Version {
+  major: number;
+  minor: number;
+  patch: number;
+}
+
+function parseVersion(version: string): Version {
   const [major, minor, patch] = version.split('.').map(Number);
   return { major, minor, patch };
 }
 
-function incrementVersion(version, type = 'patch') {
+type IncrementType = 'major' | 'minor' | 'patch';
+
+function incrementVersion(version: string, type: IncrementType = 'patch'): string {
   const v = parseVersion(version);
 
   switch (type) {
@@ -53,13 +62,43 @@ function incrementVersion(version, type = 'patch') {
   return `${v.major}.${v.minor}.${v.patch}`;
 }
 
-function updateJsonFile(filePath, updates) {
+function updateJsonFile(filePath: string, updates: Record<string, unknown>): void {
   const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
   Object.assign(data, updates);
   fs.writeFileSync(filePath, JSON.stringify(data, null, 4) + '\n', 'utf8');
 }
 
-function syncVersions(rootPath, options = {}) {
+interface MarketplacePlugin {
+  name: string;
+  source: string;
+  version?: string;
+}
+
+interface MarketplaceMetadata {
+  version?: string;
+  [key: string]: unknown;
+}
+
+interface MarketplaceData {
+  plugins: MarketplacePlugin[];
+  metadata?: MarketplaceMetadata;
+}
+
+interface UpdateItem {
+  file: string;
+  current: string;
+  new: string;
+  type: 'marketplace' | 'plugin';
+  name?: string;
+}
+
+interface SyncOptions {
+  newVersion?: string;
+  incrementType?: IncrementType;
+  dryRun?: boolean;
+}
+
+function syncVersions(rootPath: string, options: SyncOptions = {}): void {
   const { newVersion, incrementType, dryRun = false } = options;
 
   log('blue', '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -72,13 +111,13 @@ function syncVersions(rootPath, options = {}) {
 
   // Load marketplace data
   const marketplacePath = path.join(rootPath, '.claude-plugin', 'marketplace.json');
-  const marketplaceData = JSON.parse(fs.readFileSync(marketplacePath, 'utf8'));
+  const marketplaceData: MarketplaceData = JSON.parse(fs.readFileSync(marketplacePath, 'utf8'));
 
   const currentVersion = marketplaceData.metadata?.version || '0.0.0';
   log('cyan', `Current marketplace version: ${currentVersion}`);
 
   // Determine new version
-  let targetVersion;
+  let targetVersion: string;
   if (newVersion) {
     if (!isValidVersion(newVersion)) {
       log('red', `❌ Invalid version format: ${newVersion}`);
@@ -95,7 +134,7 @@ function syncVersions(rootPath, options = {}) {
 
   log('green', `New version: ${targetVersion}\n`);
 
-  const updates = [];
+  const updates: UpdateItem[] = [];
 
   // Update marketplace version
   updates.push({
@@ -171,10 +210,17 @@ function syncVersions(rootPath, options = {}) {
   log('blue', '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 }
 
+interface ParsedArgs {
+  rootPath: string;
+  dryRun: boolean;
+  incrementType?: IncrementType;
+  newVersion?: string;
+}
+
 // CLI argument parsing
-function parseArgs() {
+function parseArgs(): ParsedArgs {
   const args = process.argv.slice(2);
-  const options = {
+  const options: ParsedArgs = {
     rootPath: process.cwd(),
     dryRun: false,
   };
@@ -194,7 +240,7 @@ function parseArgs() {
       options.newVersion = args[++i];
     } else if (arg === '--help' || arg === '-h') {
       console.log(`
-Usage: sync-versions.js [options]
+Usage: sync-versions.ts [options]
 
 Options:
   -v, --version <version>   Set specific version (e.g., 1.2.3)
@@ -205,9 +251,9 @@ Options:
   -h, --help               Show this help message
 
 Examples:
-  sync-versions.js --patch
-  sync-versions.js --version 2.0.0
-  sync-versions.js --major --dry-run
+  sync-versions.ts --patch
+  sync-versions.ts --version 2.0.0
+  sync-versions.ts --major --dry-run
       `);
       process.exit(0);
     } else if (!arg.startsWith('-')) {
@@ -223,7 +269,7 @@ try {
   const options = parseArgs();
   syncVersions(options.rootPath, options);
 } catch (error) {
-  log('red', `\n💥 Error: ${error.message}`);
+  log('red', `\n💥 Error: ${(error as Error).message}`);
   console.error(error);
   process.exit(1);
 }

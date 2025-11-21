@@ -28,7 +28,7 @@ Validates marketplace and plugins according to official documentation standards.
 # Full validation (recommended)
 npm run validate:all
 
-# JSON schema validation
+# JSON schema validation + SKILL.md frontmatter validation
 npm run validate
 
 # Directory structure validation
@@ -37,6 +37,15 @@ npm run validate:structure
 # Run tests
 npm test
 ```
+
+**What gets validated:**
+- Marketplace JSON schema
+- Plugin JSON schema
+- Referenced file existence (commands, agents, skills, hooks)
+- SKILL.md YAML frontmatter:
+  - `name` field (required, kebab-case, max 64 chars)
+  - `description` field (required, max 1024 chars)
+  - `allowed-tools` field (optional)
 
 ### Version Management
 
@@ -182,6 +191,156 @@ plugins/my-plugin/
 }
 ```
 
+## 🎯 Skills Development Guide
+
+Skills are reusable prompt components that Claude can automatically discover and apply. This section covers how to create effective skills for your plugins.
+
+> 📚 **Reference**: [Official Skills Documentation](https://code.claude.com/docs/en/skills)
+
+### SKILL.md File Structure
+
+Every skill requires a `SKILL.md` file with YAML frontmatter:
+
+```yaml
+---
+name: skill-name
+description: Describe what the skill does and when to use it
+allowed-tools: Read, Grep, Glob  # Optional: restrict available tools
+---
+
+# Skill Name
+
+## Instructions
+Step-by-step instructions for Claude to follow.
+
+## Examples
+Concrete usage examples.
+```
+
+### Required Fields
+
+| Field | Description | Constraints |
+|-------|-------------|-------------|
+| `name` | Skill identifier | Lowercase, numbers, hyphens only. Max 64 chars |
+| `description` | What the skill does and when to use it | Max 1024 chars. Critical for auto-discovery |
+
+### Optional Fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `allowed-tools` | Restrict tools available to the skill | `Read, Grep, Glob` |
+
+### Writing Effective Descriptions
+
+The `description` field is crucial for Claude to automatically discover and use your skill.
+
+**❌ Too vague:**
+```yaml
+description: Helps with data
+```
+
+**✅ Specific and actionable:**
+```yaml
+description: |
+  Extract text and tables from PDF files, fill forms, merge documents.
+  Use when working with PDF files or when the user mentions PDFs,
+  forms, or document extraction.
+```
+
+**Best practices:**
+- Include what the skill does
+- Include when to use it (trigger conditions)
+- Include keywords users might mention
+
+### Directory Structure
+
+Skills must be placed in a directory containing `SKILL.md`:
+
+```
+plugins/my-plugin/
+└── skills/
+    └── my-skill/
+        ├── SKILL.md           # Required
+        ├── reference.md       # Optional: additional context
+        ├── examples.md        # Optional: more examples
+        ├── scripts/           # Optional: helper scripts
+        │   └── helper.py
+        └── templates/         # Optional: template files
+            └── template.txt
+```
+
+### Plugin.json Configuration
+
+Reference skills by their directory path (not the SKILL.md file):
+
+```json
+{
+  "name": "my-plugin",
+  "skills": [
+    "./skills/my-skill",
+    "./skills/another-skill"
+  ]
+}
+```
+
+### Using allowed-tools for Security
+
+Restrict tool access for read-only or security-sensitive skills:
+
+```yaml
+---
+name: code-analyzer
+description: Analyze code quality and patterns. Use when reviewing code.
+allowed-tools: Read, Grep, Glob
+---
+```
+
+When `allowed-tools` is specified:
+- Claude can only use the listed tools
+- No additional permission prompts for those tools
+- Useful for read-only analysis skills
+
+### Skill Design Best Practices
+
+1. **One skill = One focused purpose**
+   - ✅ "PDF form filling"
+   - ✅ "Excel data analysis"
+   - ❌ "Document processing" (too broad)
+
+2. **Include concrete examples**
+   ```markdown
+   ## Examples
+
+   ### Example 1: Extract text from PDF
+   Input: "Extract all text from report.pdf"
+   Action: Use Read tool to process the PDF...
+   ```
+
+3. **Use clear, actionable instructions**
+   ```markdown
+   ## Instructions
+   1. First, identify the target file
+   2. Read the file contents using Read tool
+   3. Parse the structure...
+   ```
+
+4. **Version your skills** (optional but recommended)
+   ```markdown
+   ## Version History
+   - v2.0.0 (2025-10-01): Breaking changes
+   - v1.1.0 (2025-09-15): Added new features
+   - v1.0.0 (2025-09-01): Initial release
+   ```
+
+### Skills Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| Claude doesn't use the skill | Make `description` more specific with trigger keywords |
+| Skill doesn't load | Validate YAML syntax, check file path |
+| Script errors | Check execute permissions, use `/` in paths |
+| Multiple skills conflict | Add unique trigger terms to each skill's description |
+
 ## 🔍 Troubleshooting
 
 ### When Validation Fails
@@ -209,3 +368,4 @@ All plugin versions are automatically synchronized. Never edit versions manually
 - [Claude Code Plugin Official Documentation](https://code.claude.com/docs/en/plugins)
 - [Plugin Marketplaces Documentation](https://code.claude.com/docs/en/plugin-marketplaces.md)
 - [Plugins Reference](https://code.claude.com/docs/en/plugins-reference.md)
+- [Skills Documentation](https://code.claude.com/docs/en/skills)

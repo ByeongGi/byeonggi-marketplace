@@ -1,26 +1,29 @@
-#!/usr/bin/env node
+#!/usr/bin/env npx tsx
 
 /**
  * 플러그인 디렉토리 구조 검증 도구
  * 공식 문서의 디렉토리 구조 규칙을 검증합니다.
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const COLORS = {
+type ColorKey = 'reset' | 'red' | 'green' | 'yellow' | 'blue' | 'cyan';
+
+const COLORS: Record<ColorKey, string> = {
   reset: '\x1b[0m',
   red: '\x1b[31m',
   green: '\x1b[32m',
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
+  cyan: '\x1b[36m',
 };
 
-function log(color, message) {
+function log(color: ColorKey, message: string): void {
   console.log(`${COLORS[color]}${message}${COLORS.reset}`);
 }
 
-function checkPluginStructure(pluginPath, pluginName) {
+function checkPluginStructure(pluginPath: string, pluginName: string): boolean {
   log('blue', `\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
   log('blue', `🏗️  STRUCTURE CHECK: ${pluginName}`);
   log('blue', '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
@@ -38,7 +41,7 @@ function checkPluginStructure(pluginPath, pluginName) {
   }
 
   // Check standard directories
-  const standardDirs = {
+  const standardDirs: Record<string, string> = {
     commands: 'commands/',
     agents: 'agents/',
     skills: 'skills/',
@@ -46,7 +49,7 @@ function checkPluginStructure(pluginPath, pluginName) {
   };
 
   log('cyan', '\n📁 Checking standard directories:');
-  Object.entries(standardDirs).forEach(([name, dir]) => {
+  Object.entries(standardDirs).forEach(([_name, dir]) => {
     const dirPath = path.join(pluginPath, dir);
     if (fs.existsSync(dirPath)) {
       const files = fs.readdirSync(dirPath);
@@ -117,7 +120,16 @@ function checkPluginStructure(pluginPath, pluginName) {
   return !hasErrors;
 }
 
-function checkAllPlugins(rootPath) {
+interface MarketplacePlugin {
+  name: string;
+  source: string;
+}
+
+interface MarketplaceData {
+  plugins: MarketplacePlugin[];
+}
+
+function checkAllPlugins(rootPath: string): boolean {
   const marketplacePath = path.join(rootPath, '.claude-plugin', 'marketplace.json');
 
   if (!fs.existsSync(marketplacePath)) {
@@ -125,7 +137,7 @@ function checkAllPlugins(rootPath) {
     process.exit(1);
   }
 
-  const marketplaceData = JSON.parse(fs.readFileSync(marketplacePath, 'utf8'));
+  const marketplaceData: MarketplaceData = JSON.parse(fs.readFileSync(marketplacePath, 'utf8'));
   let allValid = true;
 
   marketplaceData.plugins.forEach(plugin => {
@@ -147,7 +159,7 @@ try {
   const success = checkAllPlugins(rootPath);
   process.exit(success ? 0 : 1);
 } catch (error) {
-  log('red', `\n💥 Error: ${error.message}`);
+  log('red', `\n💥 Error: ${(error as Error).message}`);
   console.error(error);
   process.exit(1);
 }
