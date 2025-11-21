@@ -1,32 +1,32 @@
 {
-    "name": "byeonggi-marketplace",
-    "owner": {
-        "name": "Byeonggi",
-        "email": "your-email@example.com"
-    },
-    "metadata": {
-        "description": "Byeonggi's custom plugin marketplace for Claude Code",
-        "version": "1.0.0",
-        "pluginRoot": "./plugins"
-    },
-    "plugins": [
-        {
-            "name": "youtube-summarizer",
-            "source": "./plugins/youtube-summarizer",
-            "description": "Extract and summarize YouTube video transcripts with timestamp support",
-            "version": "1.0.0",
-            "category": "productivity",
-            "tags": [
-                "youtube",
-                "transcript",
-                "summarizer",
-                "captions",
-                "video"
-            ],
-            "author": {
-                "name": "Byeonggi"
-            },
-            "license": "MIT"
-        }
-    ]
+  "name": "byeonggi-marketplace",
+  "owner": {
+    "name": "Byeonggi",
+    "email": "your-email@example.com"
+  },
+  "metadata": {
+    "description": "Byeonggi's custom plugin marketplace for Claude Code",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "youtube-summarizer",
+      "source": "./plugins/youtube-summarizer",
+      "description": "Extract and summarize YouTube video transcripts with timestamp support",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "youtube",
+        "transcript",
+        "summarizer",
+        "captions",
+        "video"
+      ],
+      "author": {
+        "name": "Byeonggi"
+      },
+      "license": "MIT"
+    }
+  ]
 }

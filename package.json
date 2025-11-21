@@ -1,42 +1,42 @@
 {
-    "name": "byeonggi-marketplace",
-    "version": "1.0.0",
-    "description": "Byeonggi's custom plugin marketplace for Claude Code",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ByeongGi/byeonggi-marketplace.git"
-    },
-    "scripts": {
-        "validate": "tsx scripts/validate.ts",
-        "validate:structure": "tsx scripts/check-plugin-structure.ts",
-        "validate:all": "npm run validate:structure && npm run validate",
-        "version:sync": "tsx scripts/sync-versions.ts",
-        "version:patch": "tsx scripts/sync-versions.ts --patch",
-        "version:minor": "tsx scripts/sync-versions.ts --minor",
-        "version:major": "tsx scripts/sync-versions.ts --major",
-        "version:dry-run": "tsx scripts/sync-versions.ts --dry-run --patch",
-        "test": "npm run validate:all",
-        "prerelease": "npm run validate:all",
-        "format:json": "find . -name '*.json' ! -path '*/node_modules/*' -exec sh -c 'echo \"Formatting {}\" && cat {} | jq . > {}.tmp && mv {}.tmp {}' \\;",
-        "install:local": "echo '💡 Run: /plugin marketplace add .'",
-        "help": "echo '\n📦 Available Commands:\n\n  npm run validate          - Validate JSON schemas\n  npm run validate:structure - Check directory structure\n  npm run validate:all      - Run all validations\n\n  npm run version:patch     - Bump patch version (x.x.X)\n  npm run version:minor     - Bump minor version (x.X.0)\n  npm run version:major     - Bump major version (X.0.0)\n  npm run version:dry-run   - Preview version changes\n\n  npm run format:json       - Format all JSON files\n  npm test                  - Run all tests\n'"
-    },
-    "keywords": [
-        "claude-code",
-        "plugins",
-        "marketplace"
-    ],
-    "author": "Byeonggi",
-    "license": "MIT",
-    "devDependencies": {
-        "@types/node": "^24.10.1",
-        "ajv": "^8.12.0",
-        "ajv-formats": "^2.1.1",
-        "js-yaml": "^4.1.1",
-        "tsx": "^4.20.6",
-        "typescript": "^5.9.3"
-    },
-    "engines": {
-        "node": ">=16.0.0"
-    }
+  "name": "byeonggi-marketplace",
+  "version": "1.0.0",
+  "description": "Byeonggi's custom plugin marketplace for Claude Code",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ByeongGi/byeonggi-marketplace.git"
+  },
+  "scripts": {
+    "validate": "tsx scripts/validate.ts",
+    "validate:structure": "tsx scripts/check-plugin-structure.ts",
+    "validate:all": "npm run validate:structure && npm run validate",
+    "version:sync": "tsx scripts/sync-versions.ts",
+    "version:patch": "tsx scripts/sync-versions.ts --patch",
+    "version:minor": "tsx scripts/sync-versions.ts --minor",
+    "version:major": "tsx scripts/sync-versions.ts --major",
+    "version:dry-run": "tsx scripts/sync-versions.ts --dry-run --patch",
+    "test": "npm run validate:all",
+    "prerelease": "npm run validate:all",
+    "format:json": "find . -name '*.json' ! -path '*/node_modules/*' -exec sh -c 'echo \"Formatting {}\" && cat {} | jq . > {}.tmp && mv {}.tmp {}' \\;",
+    "install:local": "echo '💡 Run: /plugin marketplace add .'",
+    "help": "echo '\n📦 Available Commands:\n\n  npm run validate          - Validate JSON schemas\n  npm run validate:structure - Check directory structure\n  npm run validate:all      - Run all validations\n\n  npm run version:patch     - Bump patch version (x.x.X)\n  npm run version:minor     - Bump minor version (x.X.0)\n  npm run version:major     - Bump major version (X.0.0)\n  npm run version:dry-run   - Preview version changes\n\n  npm run format:json       - Format all JSON files\n  npm test                  - Run all tests\n'"
+  },
+  "keywords": [
+    "claude-code",
+    "plugins",
+    "marketplace"
+  ],
+  "author": "Byeonggi",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "js-yaml": "^4.1.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }

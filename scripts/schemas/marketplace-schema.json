@@ -3,7 +3,11 @@
   "title": "Claude Code Marketplace Schema",
   "description": "Schema for validating marketplace.json files according to official documentation",
   "type": "object",
-  "required": ["name", "owner", "plugins"],
+  "required": [
+    "name",
+    "owner",
+    "plugins"
+  ],
   "properties": {
     "name": {
       "type": "string",
@@ -12,7 +16,9 @@
     },
     "owner": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -49,7 +55,10 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["name", "source"],
+        "required": [
+          "name",
+          "source"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -65,7 +74,10 @@
               },
               {
                 "type": "object",
-                "required": ["source", "repo"],
+                "required": [
+                  "source",
+                  "repo"
+                ],
                 "properties": {
                   "source": {
                     "const": "github"
