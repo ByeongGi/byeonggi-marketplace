@@ -27,6 +27,23 @@
         "name": "Byeonggi"
       },
       "license": "MIT"
+    },
+    {
+      "name": "byeonggi-prompt-generator",
+      "source": "./plugins/byeonggi-prompt-generator",
+      "description": "Generate Byeonggi-style structured prompts for technical decisions and implementations",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": [
+        "prompt",
+        "decision",
+        "strategy",
+        "template"
+      ],
+      "author": {
+        "name": "Byeonggi"
+      },
+      "license": "MIT"
     }
   ]
 }

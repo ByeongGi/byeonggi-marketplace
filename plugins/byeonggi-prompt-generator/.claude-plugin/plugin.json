@@ -1,0 +1,20 @@
+{
+  "name": "byeonggi-prompt-generator",
+  "version": "1.0.0",
+  "description": "Generate Byeonggi-style structured prompts for technical decisions and implementations",
+  "author": {
+    "name": "Byeonggi"
+  },
+  "agents": [
+    "./agents/byeonggi.md"
+  ],
+  "skills": [],
+  "homepage": "https://github.com/ByeongGi/byeonggi-prompt-generator",
+  "license": "MIT",
+  "keywords": [
+    "prompt",
+    "strategy",
+    "tech-decision",
+    "feature-design"
+  ]
+}
