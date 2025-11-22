@@ -40,6 +40,34 @@ Extract and summarize YouTube video transcripts with timestamp support.
 
 [View Plugin Details →](./plugins/youtube-summarizer/README.md)
 
+### byeonggi-prompt-generator
+
+Generate structured prompts optimized for technical decisions and implementations using Byeonggi's prompt strategy.
+
+**Installation:**
+```bash
+/plugin install byeonggi-prompt-generator@byeonggi-marketplace
+```
+
+**Features:**
+- Why/What/How/What-if layered question structure
+- Templates for tech decisions, feature implementations, and deep engineering reviews
+- Business context and trade-off analysis
+- Evidence-based approach with web search and codebase analysis
+- Team scalability and maintainability considerations
+
+**Usage:**
+Simply provide context to Claude Code:
+
+```yaml
+주제: [해결하려는 문제]
+상황: [현재 상태]
+목표: [달성하려는 것]
+제약: [고려해야 할 제약사항]
+```
+
+[View Plugin Details →](./plugins/byeonggi-prompt-generator/agents/byeonggi.md)
+
 ## 🛠 Developer Guide
 
 > **For complete development information, see [DEVELOPMENT.md](./DEVELOPMENT.md).**
